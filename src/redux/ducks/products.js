@@ -1,7 +1,10 @@
+import { ajax } from 'rxjs/observable/dom/ajax'
+
 // Actions
 const FETCH_REQUEST = 'users/FETCH_REQUEST'
 const FETCH_SUCCESS = 'users/FETCH_SUCCESS'
 const FETCH_FAILURE = 'users/FETCH_FAILURE'
+const FETCH_CANCEL = 'users/FETCH_CANCEL'
 
 // Initial state
 const mainInitialState = { isFetching: false }
@@ -16,7 +19,11 @@ const reducer = (state = mainInitialState, action = {}) => {
   case FETCH_SUCCESS:
     return Object.assign({}, {
       isFetching: false,
-      users: action.payload
+      products: action.payload
+    })
+  case FETCH_CANCEL:
+    return Object.assign({}, {
+      isFetching: false
     })
   case FETCH_FAILURE:
     return Object.assign({}, {
@@ -28,13 +35,14 @@ const reducer = (state = mainInitialState, action = {}) => {
 }
 
 // Action Creators
-export const fetchUsers = () => {
+export const fetchProducts = () => {
   return {
     type: FETCH_REQUEST
   }
 }
 
 const success = payload => {
+  console.log(payload)
   return {
     type: FETCH_SUCCESS,
     payload
@@ -48,12 +56,13 @@ const failure = () => {
 }
 
 // Epic
-export const fetchUserEpic = action$ =>
+export const fetchProductsEpic = action$ =>
   action$.ofType(FETCH_REQUEST)
     .mergeMap(action =>
-      ajax.getJSON('https://jsonplaceholder.typicode.com/users')
+      ajax.getJSON('http://localhost:3000/products')
         .map(response => success(response),
              error => failure())
+        .takeUntil(action$.ofType(FETCH_CANCEL))
     );
 
 export default reducer

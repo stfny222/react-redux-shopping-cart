@@ -201,19 +201,15 @@
       "about": "Minim ea consectetur mollit labore aliquip ipsum aliqua excepteur. Velit et qui eiusmod excepteur aliqua. Voluptate non et occaecat ea et exercitation esse. Elit ea sunt quis tempor nisi consequat do velit minim id laboris.\r\n"
     }
   ],
-  "users": [
+  "carts": [
     {
       "_id": "591e6871c3b155cb7bc6a177",
       "index": 0,
       "email": "janvance@quilk.com",
-      "carts": [
-        {
-          "_id": "591e687189fb29b498e47b5e",
-          "date": "Sun May 21 1989 04:57:33 GMT-0500 (Hora est. Pacífico, Sudamérica)",
-          "total": "$0.00",
-          "products": []
-        }
-      ]
+      "date": "Sun May 21 1989 04:57:33 GMT-0500 (Hora est. Pacífico, Sudamérica)",
+      "total": "$0.00",
+      "count": 0,
+      "products": []
     }
   ]
 }

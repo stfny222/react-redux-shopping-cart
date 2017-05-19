@@ -2,16 +2,14 @@ import { combineEpics } from 'redux-observable'
 import { combineReducers } from 'redux'
 
 import counter, { incrementIfOddEpic } from '../ducks/counter'
-import users, { fetchUserEpic } from '../ducks/users'
+import products, { fetchProductsEpic } from '../ducks/products'
 
 export const rootEpic = combineEpics(
-  incrementIfOddEpic,
-  fetchUserEpic
+  fetchProductsEpic
 );
 
 const rootReducer = combineReducers({
-  counter,
-  users
+  products
 })
 
 export default rootReducer
