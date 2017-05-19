@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "webpack.config.js",
   "scripts": {
+    "server": "json-server --watch db.json",
     "build": "webpack --config webpack.config.prod.js",
     "dev": "webpack-dev-server --config webpack.config.dev.js --inline --hot"
   },
