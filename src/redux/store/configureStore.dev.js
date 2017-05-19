@@ -3,6 +3,8 @@ import { createEpicMiddleware } from 'redux-observable'
 import rootReducer, { rootEpic } from '../reducers'
 import { routerMiddleware } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
+// persist redux state in browser
+import { persistStore, autoRehydrate } from 'redux-persist'
 // Logging actions/state to your console
 import createLogger from 'redux-logger'
 
@@ -19,6 +21,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const finalCreateStore = composeEnhancers(
   // Middleware you want to use in development:
   applyMiddleware(routerMid, logger, epicMiddleware),
+  autoRehydrate()
 )(createStore)
 
 module.exports = function configureStore(initialState) {
@@ -30,6 +33,8 @@ module.exports = function configureStore(initialState) {
       store.replaceReducer(require('../reducers'))
     )
   }
+
+  persistStore(store)
 
   return store
 }

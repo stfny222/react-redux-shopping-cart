@@ -1,4 +1,5 @@
 import { ajax } from 'rxjs/observable/dom/ajax'
+import { REHYDRATE } from 'redux-persist/constants'
 
 // Actions
 const FETCH_REQUEST = 'users/FETCH_REQUEST'
@@ -12,6 +13,10 @@ const mainInitialState = { isFetching: false }
 // Reducer
 const reducer = (state = mainInitialState, action = {}) => {
   switch (action.type) {
+  case FETCH_FAILURE:
+    return Object.assign({}, {
+      products: action.payload.products
+    })
   case FETCH_REQUEST:
     return Object.assign({}, {
       isFetching: true
