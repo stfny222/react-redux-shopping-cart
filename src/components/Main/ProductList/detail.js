@@ -62,7 +62,7 @@ export default class Details extends Component {
               </div>
               <div style={styles.row}>
                 <span style={styles.label}>Price:</span>
-                <span style={styles.content}>{product.price}</span>
+                <span style={styles.content}>${product.price}</span>
               </div>
               <div style={styles.row}>
                 <SelectField

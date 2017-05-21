@@ -2,10 +2,10 @@ import { ajax } from 'rxjs/observable/dom/ajax'
 import { REHYDRATE } from 'redux-persist/constants'
 
 // Actions
-const FETCH_REQUEST = 'users/FETCH_REQUEST'
-const FETCH_SUCCESS = 'users/FETCH_SUCCESS'
-const FETCH_FAILURE = 'users/FETCH_FAILURE'
-const FETCH_CANCEL = 'users/FETCH_CANCEL'
+const FETCH_REQUEST = 'products/FETCH_REQUEST'
+const FETCH_SUCCESS = 'products/FETCH_SUCCESS'
+const FETCH_FAILURE = 'products/FETCH_FAILURE'
+const FETCH_CANCEL = 'products/FETCH_CANCEL'
 
 // Initial state
 const mainInitialState = {
@@ -72,6 +72,6 @@ export const fetchProductsEpic = action$ =>
         .map(response => success(response),
              error => failure())
         .takeUntil(action$.ofType(FETCH_CANCEL))
-    );
+    )
 
 export default reducer
