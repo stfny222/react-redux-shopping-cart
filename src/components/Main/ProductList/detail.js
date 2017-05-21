@@ -26,20 +26,25 @@ export default class Details extends Component {
       quantity: 1
     }
     this.handleChange = this.handleChange.bind(this)
+    this.add = this.add.bind(this)
   }
   handleChange(event, index, value){
     this.setState({quantity: value})
+  }
+  add(){
+    this.props.addProduct(this.props.product, this.state.quantity)
+    this.props.closeDetail()
   }
   render() {
     const { product, open, closeDetail } = this.props
     const actions = [
       <FlatButton
         label="Cancel"
-        onTouchTap={this.props.closeDetail} />,
+        onTouchTap={closeDetail} />,
       <FlatButton
         label="Add to cart"
         primary={true}
-        onTouchTap={this.props.closeDetail} />,
+        onTouchTap={this.add} />,
     ];
     return (
       <div>
@@ -75,7 +80,7 @@ export default class Details extends Component {
                     let i=1
                     while (i<=10) {
                       rows.push(
-                        <MenuItem value={i} primaryText={i} />
+                        <MenuItem key={i} value={i} primaryText={i} />
                       )
                       i++
                     }

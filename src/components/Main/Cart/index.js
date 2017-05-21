@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
-import Header from './Header'
-import ProductList from './ProductList'
 
 const styles = {
   btn: {
@@ -14,14 +12,11 @@ export default class Main extends Component {
     super(props)
   }
   render() {
-    const { products, cart, addProduct, fetchProducts } = this.props
+    const {  } = this.props
 
     return (
       <div>
-        <Header count={cart.count} />
-        <div className='main-container'>
-          {this.props.children}
-        </div>
+        Holi (:
       </div>
     )
   }

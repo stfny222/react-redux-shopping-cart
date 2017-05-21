@@ -34,7 +34,7 @@ export default class ProductList extends Component {
   }
 
   render() {
-    const { products } = this.props
+    const { products, addProduct } = this.props
 
     return (
       <div>
@@ -55,7 +55,8 @@ export default class ProductList extends Component {
         <Detail
         product={this.state.selected}
         open={this.state.openDetail}
-        closeDetail={this.closeDetail} />
+        closeDetail={this.closeDetail}
+        addProduct={addProduct} />
       </div>
     )
   }

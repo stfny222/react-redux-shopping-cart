@@ -11,6 +11,7 @@ const PURCHASE = 'cart/PURCHASE'
 
 // Initial state
 const mainInitialState = {
+  email: '',
   total: 0.00,
   count: 0,
   products: []
@@ -37,6 +38,9 @@ const productReducer = (state = {}, action) => {
 const reducer = (state = mainInitialState, action = {}) => {
   switch (action.type) {
   case REHYDRATE:
+    if (!action.payload.cart) {
+      return state
+    }
     return Object.assign({}, {
       email: action.payload.cart.email,
       total: action.payload.cart.total,
@@ -45,7 +49,7 @@ const reducer = (state = mainInitialState, action = {}) => {
     })
   case ADD_PROD:
     return Object.assign({}, {
-      count: state.count++,
+      count: state.count + action.quantity,
       total: state.total+=action.product.price,
       products: [...state.products, productReducer(undefined, action)]
     })
@@ -55,7 +59,7 @@ const reducer = (state = mainInitialState, action = {}) => {
     )
   case REMOVE_PROD:
     return Object.assign({}, {
-      count: state.count--,
+      count: state.count - action.quantity,
       total: state.total-=action.product.price,
       products: state.products.filter((product) => product.id !== action.id)
     })
@@ -71,10 +75,11 @@ const reducer = (state = mainInitialState, action = {}) => {
 }
 
 // Action Creators
-export const addProduct = product => {
+export const addProduct = (product, quantity) => {
   return {
     type: ADD_PROD,
-    product
+    product,
+    quantity
   }
 }
 
@@ -86,10 +91,11 @@ export const editProduct = (id, quantity) => {
   }
 }
 
-export const removeProduct = id => {
+export const removeProduct = (id, quantity) => {
   return {
     type: REMOVE_PROD,
-    id
+    id,
+    quantity
   }
 }
 

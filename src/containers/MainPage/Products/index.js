@@ -1,13 +1,12 @@
-import MainPage from '../../components/Main'
+import Products from '../../../components/Main/ProductList'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { fetchProducts } from '../../redux/ducks/products'
-import { addProduct } from '../../redux/ducks/cart'
+import { fetchProducts } from '../../../redux/ducks/products'
+import { addProduct } from '../../../redux/ducks/cart'
 
 const mapStateToProps = (state) => {
   return {
-    products: state.products.products,
-    cart: state.cart
+    products: state.products.products
   }
 }
 
@@ -22,4 +21,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MainPage))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Products))
