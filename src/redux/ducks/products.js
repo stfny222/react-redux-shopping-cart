@@ -8,18 +8,22 @@ const FETCH_FAILURE = 'users/FETCH_FAILURE'
 const FETCH_CANCEL = 'users/FETCH_CANCEL'
 
 // Initial state
-const mainInitialState = { isFetching: false }
+const mainInitialState = {
+  isFetching: false,
+  products: []
+}
 
 // Reducer
 const reducer = (state = mainInitialState, action = {}) => {
   switch (action.type) {
-  case FETCH_FAILURE:
+  case REHYDRATE:
     return Object.assign({}, {
-      products: action.payload.products
+      products: action.payload.products.products
     })
   case FETCH_REQUEST:
     return Object.assign({}, {
-      isFetching: true
+      isFetching: true,
+      products: [...state.products]
     })
   case FETCH_SUCCESS:
     return Object.assign({}, {
@@ -64,7 +68,7 @@ const failure = () => {
 export const fetchProductsEpic = action$ =>
   action$.ofType(FETCH_REQUEST)
     .mergeMap(action =>
-      ajax.getJSON('http://localhost:3000/products')
+      ajax.getJSON('http://localhost:3000/products?_page=1&_limit=6')/*&type=food*/
         .map(response => success(response),
              error => failure())
         .takeUntil(action$.ofType(FETCH_CANCEL))

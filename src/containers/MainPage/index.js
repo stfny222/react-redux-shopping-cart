@@ -5,7 +5,7 @@ import { fetchProducts } from '../../redux/ducks/products'
 
 const mapStateToProps = (state) => {
   return {
-    products: state.products
+    products: state.products.products
   }
 }
 

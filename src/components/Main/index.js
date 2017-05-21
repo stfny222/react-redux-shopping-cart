@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import Header from './Header'
+import ProductList from './ProductList'
 
 const styles = {
   btn: {
@@ -8,10 +9,9 @@ const styles = {
   }
 }
 
-export default class Counter extends Component {
+export default class Main extends Component {
   constructor(props) {
     super(props)
-    this.state = {count: props.initialCount}
   }
   render() {
     const { products, fetchProducts } = this.props
@@ -20,7 +20,7 @@ export default class Counter extends Component {
       <div>
         <Header count={0} />
         <div className='main-container'>
-          <RaisedButton label="Fetch" onTouchTap={fetchProducts} />
+          <ProductList products={products} fetchProducts={fetchProducts} />
         </div>
       </div>
     )
