@@ -21,9 +21,11 @@ const mainInitialState = {
 const productReducer = (state = {}, action) => {
   switch (action.type) {
   case ADD_PROD:
-    return action.product
+    return Object.assign({}, action.product, {
+      quantity: action.quantity
+    })
   case EDIT_PROD:
-    if (state.id !== action.id) {
+    if (state.id !== action.product.id) {
       return state
     }
     return Object.assign({}, state, {
@@ -42,26 +44,30 @@ const reducer = (state = mainInitialState, action = {}) => {
       return state
     }
     return Object.assign({}, {
-      email: action.payload.cart.email,
-      total: action.payload.cart.total,
-      count: action.payload.cart.count,
-      products: action.payload.cart.products
+      email: action.payload.cart.email ? action.payload.cart.email : state.email,
+      total: action.payload.cart.total ? action.payload.cart.total : state.total,
+      count: action.payload.cart.count ? action.payload.cart.count : state.count,
+      products: action.payload.cart.products ? action.payload.cart.products : state.products
     })
   case ADD_PROD:
     return Object.assign({}, {
       count: state.count + action.quantity,
-      total: state.total+=action.product.price,
+      total: state.total + action.product.price * action.quantity,
       products: [...state.products, productReducer(undefined, action)]
     })
   case EDIT_PROD:
-    return state.products.map(p =>
-      productReducer(p, action)
-    )
+    return Object.assign({}, {
+      count: state.count + action.diff,
+      total: state.total + action.product.price * action.diff,
+      products: state.products.map(p =>
+        productReducer(p, action)
+      )
+    })
   case REMOVE_PROD:
     return Object.assign({}, {
-      count: state.count - action.quantity,
-      total: state.total-=action.product.price,
-      products: state.products.filter((product) => product.id !== action.id)
+      count: state.count - action.product.quantity,
+      total: state.total - action.product.price * action.product.quantity,
+      products: state.products.filter((product) => product.id !== action.product.id)
     })
   case REMOVE_ALL:
     return Object.assign({}, {
@@ -83,19 +89,19 @@ export const addProduct = (product, quantity) => {
   }
 }
 
-export const editProduct = (id, quantity) => {
+export const editProduct = (product, quantity, diff) => {
   return {
     type: EDIT_PROD,
-    id,
-    quantity
+    product,
+    quantity,
+    diff
   }
 }
 
-export const removeProduct = (id, quantity) => {
+export const removeProduct = product => {
   return {
     type: REMOVE_PROD,
-    id,
-    quantity
+    product
   }
 }
 
@@ -104,15 +110,5 @@ export const removeAll = () => {
     type: REMOVE_ALL
   }
 }
-
-// Epic
-// export const fetchProductsEpic = action$ =>
-//   action$.ofType(FETCH_REQUEST)
-//     .mergeMap(action =>
-//       ajax.getJSON('http://localhost:3000/products?_page=1&_limit=6')/*&type=food*/
-//         .map(response => success(response),
-//              error => failure())
-//         .takeUntil(action$.ofType(FETCH_CANCEL))
-//     );
 
 export default reducer

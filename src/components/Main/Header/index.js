@@ -11,7 +11,7 @@ const styles = {
   }
 }
 
-const Cart = (props) => (
+const GoToCart = (props) => (
   <Link to="/cart">
     <Badge
     badgeContent={props.count}
@@ -40,7 +40,7 @@ export default class Header extends Component {
       <AppBar
       title={<span style={styles.title}>Shopping Cart Example</span>}
       onTitleTouchTap={this.handleTouchTap}
-      iconElementRight={<Cart count={count} />} />
+      iconElementRight={<GoToCart count={count} />} />
     )
   }
 }

@@ -12,11 +12,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    editProduct: (id, quantity) => {
-      dispatch(editProduct(id, quantity))
+    editProduct: (product, quantity, diff) => {
+      dispatch(editProduct(product, quantity, diff))
     },
-    removeProduct: (id, quantity) => {
-      dispatch(removeProduct(id, quantity))
+    removeProduct: (product) => {
+      dispatch(removeProduct(product))
     },
     removeAll: () => {
       dispatch(removeAll())

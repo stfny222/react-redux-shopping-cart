@@ -47,7 +47,7 @@ export default class ProductList extends Component {
             key={product.id}
             title={<span>{product.name} - ${product.price}</span>}
             subtitle={<span>by {product.brand}</span>}
-            actionIcon={<IconButton id={product._id} onTouchTap={() => this.openDetail(product)}><CartIcon color="white" /></IconButton>}>
+            actionIcon={<IconButton id={product.id} onTouchTap={() => this.openDetail(product)}><CartIcon color="white" /></IconButton>}>
               <img src={product.picture} />
             </GridTile>
           ))}

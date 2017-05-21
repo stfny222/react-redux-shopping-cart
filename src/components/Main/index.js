@@ -14,7 +14,7 @@ export default class Main extends Component {
     super(props)
   }
   render() {
-    const { products, cart, addProduct, fetchProducts } = this.props
+    const { cart } = this.props
 
     return (
       <div>

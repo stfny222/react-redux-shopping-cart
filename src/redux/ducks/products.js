@@ -1,5 +1,6 @@
 import { ajax } from 'rxjs/observable/dom/ajax'
 import { REHYDRATE } from 'redux-persist/constants'
+import { BASEURL, PRODUCTS } from '../constants'
 
 // Actions
 const FETCH_REQUEST = 'products/FETCH_REQUEST'
@@ -16,10 +17,10 @@ const mainInitialState = {
 // Reducer
 const reducer = (state = mainInitialState, action = {}) => {
   switch (action.type) {
-  case REHYDRATE:
+  /* case REHYDRATE:
     return Object.assign({}, {
       products: action.payload.products.products
-    })
+    }) */
   case FETCH_REQUEST:
     return Object.assign({}, {
       isFetching: true,
@@ -68,7 +69,7 @@ const failure = () => {
 export const fetchProductsEpic = action$ =>
   action$.ofType(FETCH_REQUEST)
     .mergeMap(action =>
-      ajax.getJSON('http://localhost:3000/products?_page=1&_limit=6')/*&type=food*/
+      ajax.getJSON(BASEURL + PRODUCTS)/*?_page=1&_limit=6&type=food*/
         .map(response => success(response),
              error => failure())
         .takeUntil(action$.ofType(FETCH_CANCEL))
