@@ -4,12 +4,6 @@ import IconButton from 'material-ui/IconButton'
 import CartIcon from 'material-ui/svg-icons/action/add-shopping-cart'
 import Detail from './detail'
 
-const styles = {
-  btn: {
-    marginRight: '10px'
-  }
-}
-
 export default class ProductList extends Component {
   constructor(props) {
     super(props)
@@ -21,18 +15,15 @@ export default class ProductList extends Component {
     this.openDetail = this.openDetail.bind(this)
     this.closeDetail = this.closeDetail.bind(this)
   }
-
   closeDetail() {
     this.setState({openDetail: false})
   }
-
   openDetail(product) {
     this.setState({
       selected: product,
       openDetail: true
     })
   }
-
   render() {
     const { products, addProduct } = this.props
 
@@ -47,7 +38,7 @@ export default class ProductList extends Component {
             key={product.id}
             title={<span>{product.name} - ${product.price}</span>}
             subtitle={<span>by {product.brand}</span>}
-            actionIcon={<IconButton id={product.id} onTouchTap={() => this.openDetail(product)}><CartIcon color="white" /></IconButton>}>
+            actionIcon={<IconButton id={product.id} onTouchTap={() => this.openDetail(product)}><CartIcon color='white' /></IconButton>}>
               <img src={product.picture} />
             </GridTile>
           ))}

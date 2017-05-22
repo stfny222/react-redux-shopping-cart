@@ -4,21 +4,6 @@ import FlatButton from 'material-ui/FlatButton'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 
-const styles = {
-  label: {
-    paddingRight: '50px'
-  },
-  content: {
-  },
-  row: {
-    paddingRight: '50px',
-    marginBottom: '15px'
-  },
-  customWidth: {
-    width: '100px'
-  }
-}
-
 export default class Details extends Component {
   constructor(props) {
     super(props);
@@ -52,29 +37,29 @@ export default class Details extends Component {
         title={product.name}
         actions={actions}
         open={open}
-        onRequestClose={closeDetail} >
-          <div style={{display: 'flex'}}>
-            <div style={{display: 'block'}}>
-              <div style={styles.row}>
-                <span style={styles.label}>Brand:</span>
-                <span style={styles.content}>{product.brand}</span>
+        onRequestClose={closeDetail}>
+          <div className='flex'>
+            <div className='block'>
+              <div className='row'>
+                <span className='label'>Brand:</span>
+                <span>{product.brand}</span>
               </div>
-              <div style={styles.row}>
-                <span style={styles.label}>Description:</span>
+              <div className='row'>
+                <span className='label'>Description:</span>
               </div>
-              <div style={styles.row}>
-                <p style={styles.content}>{product.about}</p>
+              <div className='row'>
+                <p>{product.about}</p>
               </div>
-              <div style={styles.row}>
-                <span style={styles.label}>Price:</span>
-                <span style={styles.content}>${product.price}</span>
+              <div className='row'>
+                <span className='label'>Price:</span>
+                <span>${product.price}</span>
               </div>
-              <div style={styles.row}>
+              <div className='row'>
                 <SelectField
                 floatingLabelText="Quantity"
                 value={this.state.quantity}
                 onChange={this.handleChange}
-                style={styles.customWidth}>
+                style={{ width: '100px' }}>
                 {(() => {
                     let rows = []
                     let i=1
@@ -89,7 +74,7 @@ export default class Details extends Component {
                 </SelectField>
               </div>
             </div>
-            <img style={{height: 300}} src={product.picture} />
+            <img height='300' src={product.picture} />
           </div>
         </Dialog>
       </div>

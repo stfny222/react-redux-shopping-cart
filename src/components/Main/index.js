@@ -3,12 +3,6 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Header from './Header'
 import ProductList from './ProductList'
 
-const styles = {
-  btn: {
-    marginRight: '10px'
-  }
-}
-
 export default class Main extends Component {
   constructor(props) {
     super(props)

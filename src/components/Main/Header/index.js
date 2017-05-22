@@ -5,12 +5,6 @@ import Badge from 'material-ui/Badge'
 import IconButton from 'material-ui/IconButton'
 import CartIcon from 'material-ui/svg-icons/maps/local-grocery-store'
 
-const styles = {
-  title: {
-    cursor: 'pointer',
-  }
-}
-
 const GoToCart = (props) => (
   <Link to="/cart">
     <Badge
@@ -38,7 +32,7 @@ export default class Header extends Component {
 
     return (
       <AppBar
-      title={<span style={styles.title}>Shopping Cart Example</span>}
+      title={<span style={{ cursor: 'pointer' }}>Shopping Cart Example</span>}
       onTitleTouchTap={this.handleTouchTap}
       iconElementRight={<GoToCart count={count} />} />
     )

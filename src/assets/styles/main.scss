@@ -17,3 +17,26 @@ body {
 .main-container {
   padding: 30px;
 }
+
+.flex {
+  display: flex;
+}
+
+.block {
+  display: block;
+}
+
+.row {
+  padding-right: 50px;
+  margin-bottom: 15px;
+}
+
+.label {
+  padding-right: 50px;
+}
+
+.prodContainer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
