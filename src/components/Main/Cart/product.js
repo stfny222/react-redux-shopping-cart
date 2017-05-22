@@ -31,7 +31,7 @@ export default class Product extends Component {
       <div>
         <Paper style={{ padding: '20px', display: 'flex', marginBottom: '15px', alignItems: 'center' }}>
           <img width='150' height='100' src={product.picture} />
-          <div className='prodContainer'>
+          <div className='flexContainer'>
             <CardTitle style={{width: '50%'}} title={<span>{product.name} - ${product.price}</span>} subtitle={<span>by {product.brand}</span>} />
             <SelectField
             floatingLabelText="Quantity"

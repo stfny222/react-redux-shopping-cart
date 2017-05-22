@@ -4,6 +4,7 @@ import { BASEURL, PRODUCTS } from '../constants'
 
 // Actions
 const FETCH_REQUEST = 'products/FETCH_REQUEST'
+const FILTER_REQUEST = 'products/FILTER_REQUEST'
 const FETCH_SUCCESS = 'products/FETCH_SUCCESS'
 const FETCH_FAILURE = 'products/FETCH_FAILURE'
 const FETCH_CANCEL = 'products/FETCH_CANCEL'
@@ -22,6 +23,11 @@ const reducer = (state = mainInitialState, action = {}) => {
       products: action.payload.products.products
     }) */
   case FETCH_REQUEST:
+    return Object.assign({}, {
+      isFetching: true,
+      products: [...state.products]
+    })
+  case FILTER_REQUEST:
     return Object.assign({}, {
       isFetching: true,
       products: [...state.products]
@@ -51,8 +57,14 @@ export const fetchProducts = () => {
   }
 }
 
+export const filterProducts = filter => {
+  return {
+    type: FILTER_REQUEST,
+    filter
+  }
+}
+
 const success = payload => {
-  console.log(payload)
   return {
     type: FETCH_SUCCESS,
     payload
@@ -65,7 +77,7 @@ const failure = () => {
   }
 }
 
-// Epic
+// Epics
 export const fetchProductsEpic = action$ =>
   action$.ofType(FETCH_REQUEST)
     .mergeMap(action =>
@@ -74,5 +86,14 @@ export const fetchProductsEpic = action$ =>
              error => failure())
         .takeUntil(action$.ofType(FETCH_CANCEL))
     )
+
+export const filterProductsEpic = action$ =>
+    action$.ofType(FILTER_REQUEST)
+      .mergeMap(action =>
+        ajax.getJSON(BASEURL + PRODUCTS + '?type=' + action.filter)
+          .map(response => success(response),
+               error => failure())
+          .takeUntil(action$.ofType(FETCH_CANCEL))
+      )
 
 export default reducer
