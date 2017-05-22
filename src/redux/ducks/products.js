@@ -5,6 +5,7 @@ import { BASEURL, PRODUCTS } from '../constants'
 // Actions
 const FETCH_REQUEST = 'products/FETCH_REQUEST'
 const FILTER_REQUEST = 'products/FILTER_REQUEST'
+const SEARCH_REQUEST = 'products/SEARCH_REQUEST'
 const FETCH_SUCCESS = 'products/FETCH_SUCCESS'
 const FETCH_FAILURE = 'products/FETCH_FAILURE'
 const FETCH_CANCEL = 'products/FETCH_CANCEL'
@@ -28,6 +29,11 @@ const reducer = (state = mainInitialState, action = {}) => {
       products: [...state.products]
     })
   case FILTER_REQUEST:
+    return Object.assign({}, {
+      isFetching: true,
+      products: [...state.products]
+    })
+  case SEARCH_REQUEST:
     return Object.assign({}, {
       isFetching: true,
       products: [...state.products]
@@ -64,6 +70,13 @@ export const filterProducts = filter => {
   }
 }
 
+export const searchProducts = search => {
+  return {
+    type: SEARCH_REQUEST,
+    search
+  }
+}
+
 const success = payload => {
   return {
     type: FETCH_SUCCESS,
@@ -94,6 +107,14 @@ export const filterProductsEpic = action$ =>
           .map(response => success(response),
                error => failure())
           .takeUntil(action$.ofType(FETCH_CANCEL))
+      )
+
+export const searchProductsEpic = action$ =>
+    action$.ofType(SEARCH_REQUEST)
+      .switchMap(action =>
+        ajax.getJSON(BASEURL + PRODUCTS + '?name_like=' + action.search)
+          .map(response => success(response),
+               error => failure())
       )
 
 export default reducer
