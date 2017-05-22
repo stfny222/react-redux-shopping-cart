@@ -8,7 +8,7 @@ import CartIcon from 'material-ui/svg-icons/maps/local-grocery-store'
 const GoToCart = (props) => (
   <Link to="/cart">
     <Badge
-    badgeContent={props.count}
+    badgeContent={props.count ? props.count : 0}
     secondary={true}
     style={{padding: '0px 10px 0px 0px'}}
     badgeStyle={{width: 20, height: 20, top: 27}}>

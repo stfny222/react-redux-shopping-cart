@@ -2,11 +2,12 @@ import { combineEpics } from 'redux-observable'
 import { combineReducers } from 'redux'
 
 import products, { fetchProductsEpic, filterProductsEpic } from '../ducks/products'
-import cart from '../ducks/cart'
+import cart, { postCartEpic } from '../ducks/cart'
 
 export const rootEpic = combineEpics(
   fetchProductsEpic,
-  filterProductsEpic
+  filterProductsEpic,
+  postCartEpic
 );
 
 const rootReducer = combineReducers({

@@ -2,7 +2,7 @@ import Cart from '../../../components/Main/Cart'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import {  } from '../../../redux/ducks/products'
-import { editProduct, removeProduct, removeAll } from '../../../redux/ducks/cart'
+import { editProduct, removeProduct, removeAll, purchase } from '../../../redux/ducks/cart'
 
 const mapStateToProps = (state) => {
   return {
@@ -20,6 +20,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     removeAll: () => {
       dispatch(removeAll())
+    },
+    purchase: (payload) => {
+      dispatch(purchase(payload))
     }
   }
 }
