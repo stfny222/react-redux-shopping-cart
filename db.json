@@ -201,15 +201,5 @@
       "about": "Minim ea consectetur mollit labore aliquip ipsum aliqua excepteur. Velit et qui eiusmod excepteur aliqua.\r\n"
     }
   ],
-  "carts": [
-    {
-      "id": "591e6871c3b155cb7bc6a177",
-      "index": 0,
-      "email": "janvance@quilk.com",
-      "date": "Sun May 21 1989 04:57:33 GMT-0500 (Hora est. Pacífico, Sudamérica)",
-      "total": 0.00,
-      "count": 0,
-      "products": []
-    }
-  ]
+  "carts": []
 }

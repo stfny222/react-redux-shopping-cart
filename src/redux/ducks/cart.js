@@ -22,14 +22,16 @@ const productReducer = (state = {}, action) => {
   switch (action.type) {
   case ADD_PROD:
     return Object.assign({}, action.product, {
-      quantity: action.quantity
+      quantity: action.quantity,
+      subtotal: Number(action.product.price * action.quantity).toFixed(2)
     })
   case EDIT_PROD:
     if (state.id !== action.product.id) {
       return state
     }
     return Object.assign({}, state, {
-      quantity: action.quantity
+      quantity: action.quantity,
+      subtotal: Number(action.product.price * action.quantity).toFixed(2)
     })
   default:
     return state
@@ -52,13 +54,13 @@ const reducer = (state = mainInitialState, action = {}) => {
   case ADD_PROD:
     return Object.assign({}, {
       count: state.count + action.quantity,
-      total: state.total + action.product.price * action.quantity,
+      total: Number(state.total + action.product.price * action.quantity).toFixed(2),
       products: [...state.products, productReducer(undefined, action)]
     })
   case EDIT_PROD:
     return Object.assign({}, {
       count: state.count + action.diff,
-      total: state.total + action.product.price * action.diff,
+      total: Number(state.total + action.product.price * action.diff).toFixed(2),
       products: state.products.map(p =>
         productReducer(p, action)
       )
@@ -66,7 +68,7 @@ const reducer = (state = mainInitialState, action = {}) => {
   case REMOVE_PROD:
     return Object.assign({}, {
       count: state.count - action.product.quantity,
-      total: state.total - action.product.price * action.product.quantity,
+      total: Number(state.total - action.product.price * action.product.quantity).toFixed(2),
       products: state.products.filter((product) => product.id !== action.product.id)
     })
   case REMOVE_ALL:
